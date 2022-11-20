@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Telegram.Bot;
 using VoiceTexterBot.Library;
+using VoiceTexterBot.Library.Configuration;
 
 namespace VoiceTexterBot
 {
@@ -31,6 +32,14 @@ namespace VoiceTexterBot
             services.AddSingleton<ITelegramBotClient>(provider => new TelegramBotClient("5373127739:AAEJ3GRu_LHwJRj1Y5YsW3ai-MLTe_i3gw0"));
             // Регистрируем постоянно активный сервис бота
             services.AddHostedService<Bot>();
+        }
+
+        static AppSettings BuildAppSettings()
+        {
+            return new AppSettings()
+            {
+                BotToken = "5373127739:AAEJ3GRu_LHwJRj1Y5YsW3ai-MLTe_i3gw0"
+            };
         }
     }
 }
