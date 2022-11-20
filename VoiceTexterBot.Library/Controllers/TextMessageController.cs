@@ -26,7 +26,7 @@ namespace VoiceTexterBot.Library.Controllers
                     break;
 
                 default:
-                    await _telegramClient.SendTextMessageAsync(message.Chat.Id, $"Отправлено {_operation.Op(message.Text)} символов", cancellationToken: ct);
+                    await _telegramClient.SendTextMessageAsync(message.Chat.Id, $"Отправлено {_operation.Op(message.Text)}", cancellationToken: ct);
                     break;
             }
         }
