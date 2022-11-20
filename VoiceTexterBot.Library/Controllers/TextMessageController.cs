@@ -10,11 +10,13 @@ namespace VoiceTexterBot.Library.Controllers
     {
         private readonly ITelegramBotClient _telegramClient;
         private readonly IOperation _operation;
+        private readonly IStorage _memoryStorage;
 
-        public TextMessageController(ITelegramBotClient telegramBotClient, IOperation operation)
+        public TextMessageController(ITelegramBotClient telegramBotClient, IOperation operation, IStorage memoryStorage)
         {
             _telegramClient = telegramBotClient;
             _operation = operation;
+            _memoryStorage = memoryStorage;
         }
 
         public async Task Handle(Message message, CancellationToken ct)
@@ -37,7 +39,11 @@ namespace VoiceTexterBot.Library.Controllers
                     break;
 
                 default:
-                    await _telegramClient.SendTextMessageAsync(message.Chat.Id, $"Отправлено {_operation.Op(message.Text)}", cancellationToken: ct);
+                    string userOperationCode = _memoryStorage.GetSession(message.Chat.Id).OperationCode;
+                    if (userOperationCode == "sum")
+                        await _telegramClient.SendTextMessageAsync(message.Chat.Id, _operation.Sum(message.Text), cancellationToken: ct);
+                    else
+                        await _telegramClient.SendTextMessageAsync(message.Chat.Id, _operation.Cnt(message.Text), cancellationToken: ct);
                     break;
             }
         }

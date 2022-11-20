@@ -2,6 +2,7 @@
 {
     public interface IOperation
     {
-        string Op(string message);
+        string Sum(string message);
+        string Cnt(string message);
     }
 }
