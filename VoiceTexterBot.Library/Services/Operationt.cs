@@ -39,8 +39,12 @@
                 else
                     return "";
             }
-            catch
+            catch(Exception e)
             {
+                if (e.Message == "Value was either too large or too small for an Int32.")
+                    return "слишком большое число";
+                if (e.Message == "Input string was not in a correct format.")
+                    return "Вещественные числа не поддерживаются";
                 return "Неверный формат, напишите числа через пробел";
             }
         }
