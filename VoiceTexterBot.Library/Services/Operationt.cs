@@ -2,6 +2,11 @@
 {
     public class Operation : IOperation
     {
+        /// <summary>
+        /// Операция подсчета символов в сообщении
+        /// </summary>
+        /// <param name="message">сообщение</param>
+        /// <returns></returns>
         public string Cnt(string message)
         {
             if (message != null)
@@ -12,20 +17,32 @@
                 return "";
         }
 
+        /// <summary>
+        /// Операция подсчета суммы чисел в сообщении
+        /// </summary>
+        /// <param name="message">сообщение</param>
+        /// <returns></returns>
         public string Sum(string message)
         {
-            if (message != null)
+            try
             {
-                var mes = message.Split(' ');
-                int sum = 0;
-                foreach (var word in mes)
+                if (message != null)
                 {
-                    sum += Int32.Parse(word);
+                    var mes = message.Split(' ');
+                    int sum = 0;
+                    foreach (var word in mes)
+                    {
+                        sum += Int32.Parse(word);
+                    }
+                    return string.Concat("Сумма чисел в сообщении: ", sum);
                 }
-                return string.Concat($"{message} Сумма чисел в сообщении:", sum);
+                else
+                    return "";
             }
-            else
-                return "";
+            catch
+            {
+                return "Неверный формат, напишите числа через пробел";
+            }
         }
 
         /// <summary>
@@ -37,27 +54,21 @@
         {
             if (n <= 20)
             {
-                switch (n)
+                return n switch
                 {
-                    case 1: return "символ";
-                    case 3:
-                    case 4:
-                    case 2: return "символа";
-                    default: return "символов";
-
-                }
+                    1 => "символ",
+                    3 or 4 or 2 => "символа",
+                    _ => "символов",
+                };
             }
             else
             {
-                switch (n % 10)
+                return (n % 10) switch
                 {
-                    case 1: return "символ";
-                    case 3:
-                    case 4:
-                    case 2: return "символа";
-                    default: return "символов";
-
-                }
+                    1 => "символ",
+                    3 or 4 or 2 => "символа",
+                    _ => "символов",
+                };
             }
         }
     }

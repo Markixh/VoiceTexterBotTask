@@ -6,6 +6,9 @@ using VoiceTexterBot.Library.Services;
 
 namespace VoiceTexterBot.Library.Controllers
 {
+    /// <summary>
+    /// Котроллер обработки текстового сообщения
+    /// </summary>
     public class TextMessageController
     {
         private readonly ITelegramBotClient _telegramClient;
@@ -23,6 +26,7 @@ namespace VoiceTexterBot.Library.Controllers
         {
             switch (message.Text)
             {
+                //Главное меню
                 case "/start":
                     // Объект, представляющий кноки
                     var buttons = new List<InlineKeyboardButton[]>();
@@ -41,8 +45,10 @@ namespace VoiceTexterBot.Library.Controllers
                 default:
                     string userOperationCode = _memoryStorage.GetSession(message.Chat.Id).OperationCode;
                     if (userOperationCode == "sum")
+                        //подсчет суммы чисел
                         await _telegramClient.SendTextMessageAsync(message.Chat.Id, _operation.Sum(message.Text), cancellationToken: ct);
                     else
+                        //подсчет символов в сообщении
                         await _telegramClient.SendTextMessageAsync(message.Chat.Id, _operation.Cnt(message.Text), cancellationToken: ct);
                     break;
             }

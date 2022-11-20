@@ -5,6 +5,9 @@ using VoiceTexterBot.Library.Services;
 
 namespace VoiceTexterBot.Library.Controllers
 {
+    /// <summary>
+    /// Контроллер обработки нажатий на пользовательские кнопки
+    /// </summary>
     public class InlineKeyboardController
     {
         private readonly ITelegramBotClient _telegramClient;

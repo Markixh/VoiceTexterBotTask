@@ -3,6 +3,9 @@ using Telegram.Bot.Types;
 
 namespace VoiceTexterBot.Library.Controllers
 {
+    /// <summary>
+    /// контроллер обработки сообщений, которые не являются командой, текстом или аудиосообщением
+    /// </summary>
     public class DefaultMessageController
     {
         private readonly ITelegramBotClient _telegramClient;
