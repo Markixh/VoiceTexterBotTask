@@ -33,6 +33,7 @@ namespace VoiceTexterBot
             AppSettings appSettings = BuildAppSettings();
 
             services.AddSingleton<IOperation, Operation>();
+            services.AddSingleton<IStorage, MemoryStorage>();
 
             // Подключаем контроллеры сообщений и кнопок
             services.AddTransient<DefaultMessageController>();
