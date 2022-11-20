@@ -1,4 +1,6 @@
-﻿namespace VoiceTexterBot.Library.Services
+﻿using System.Linq.Expressions;
+
+namespace VoiceTexterBot.Library.Services
 {
     public class Operation : IOperation
     {
@@ -6,7 +8,18 @@
         {
             if (message != null)
             {
-                return string.Concat(message.Length.ToString(), " ", Pref(message.Length));
+                if (!IsOperation(message))
+                    return string.Concat(message.Length.ToString(), " ", Pref(message.Length));
+                else
+                {
+                    var mes = message.Split(' ');
+                    int sum = 0;
+                    foreach (var word in mes)
+                    {
+                        sum += Int32.Parse(word);
+                    }
+                    return string.Concat("Сумма чисел в сообщении:", sum);
+                }
             }
             else
                 return "";
@@ -37,6 +50,24 @@
                     default: return "символов";
 
                 }
+            }
+        }
+
+        private bool IsOperation(string message)
+        {
+            try
+            {
+                var mes = message.Split(' ');
+                int sum = 0;
+                foreach(var word in mes)
+                {
+                    sum += Int32.Parse(word);
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
     }
