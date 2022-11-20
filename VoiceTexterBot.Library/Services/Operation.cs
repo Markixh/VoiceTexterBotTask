@@ -1,9 +1,12 @@
-﻿using System.Linq.Expressions;
-
-namespace VoiceTexterBot.Library.Services
+﻿namespace VoiceTexterBot.Library.Services
 {
     public class Operation : IOperation
     {
+        /// <summary>
+        /// Подсчет символов в тексте или суммы чисел, в зависимости от формата введенного сообщения
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public string Op(string message)
         {
             if (message != null)
@@ -25,6 +28,11 @@ namespace VoiceTexterBot.Library.Services
                 return "";
         }
 
+        /// <summary>
+        /// Склонение слова "символ", в зависимости от числа
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
         private string Pref(int n)
         {
             if (n <= 20)
@@ -53,6 +61,11 @@ namespace VoiceTexterBot.Library.Services
             }
         }
 
+        /// <summary>
+        /// Проверка типа сообщения
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         private bool IsOperation(string message)
         {
             try
