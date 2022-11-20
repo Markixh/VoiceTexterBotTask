@@ -18,7 +18,7 @@ namespace VoiceTexterBot.Library.Services
                     {
                         sum += Int32.Parse(word);
                     }
-                    return string.Concat("Сумма чисел в сообщении:", sum);
+                    return string.Concat($"{message} Сумма чисел в сообщении:", sum);
                 }
             }
             else

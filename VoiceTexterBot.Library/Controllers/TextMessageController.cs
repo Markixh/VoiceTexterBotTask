@@ -22,7 +22,9 @@ namespace VoiceTexterBot.Library.Controllers
             {
                 case "/start":
 
-                    await _telegramClient.SendTextMessageAsync(message.Chat.Id, $"<b>  Наш бот подсчитывает символы в тексте</b>", cancellationToken: ct, parseMode: ParseMode.Html);
+                    await _telegramClient.SendTextMessageAsync(message.Chat.Id, $"<b>Наш бот подсчитывает символы в тексте</b> {Environment.NewLine}" +
+                        " Например: Пример - введено 6 символов" + $"{Environment.NewLine} <b>Или подсчитывает сумму введенных чисел через пробел</b> {Environment.NewLine}" +
+                        " Например: 1 2 3 - сумма чисел 6", cancellationToken: ct, parseMode: ParseMode.Html);
                     break;
 
                 default:
